@@ -14,27 +14,27 @@ import ru.deloom.jpaservice.services.PersonsService;
 public class PersonsServiceImpl implements PersonsService {
 
 	@Autowired
-	private PersonsRepository personRepository;
+	private PersonsRepository personsRepository;
 
 	public Persons addPerson(Persons person) {
-		return personRepository.saveAndFlush(person);
+		return personsRepository.saveAndFlush(person);
 	}
 
 	public void delete(Integer id) {
-		personRepository.delete(id);
+		personsRepository.delete(id);
 	}
 
 	@Transactional(readOnly = true)
 	public List<Persons> getByName(String name) {
-		return personRepository.findByName(name);
+		return personsRepository.findByName(name);
 	}
 
 	public Persons editPerson(Persons person) {
-		return personRepository.saveAndFlush(person);
+		return personsRepository.saveAndFlush(person);
 	}
 
 	@Transactional(readOnly = true)
 	public List<Persons> getAll() {
-		return personRepository.findAll();
+		return personsRepository.findAll();
 	}
 }
