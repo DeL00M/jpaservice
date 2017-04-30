@@ -11,6 +11,7 @@ import ru.deloom.jpaservice.repositories.PersonsRepository;
 import ru.deloom.jpaservice.services.PersonsService;
 
 @Service
+@Transactional
 public class PersonsServiceImpl implements PersonsService {
 
 	@Autowired

@@ -23,6 +23,11 @@ public class PersonsController {
 	
 	@Autowired
     DataSource dataSource;
+	
+	@RequestMapping(value = "/test", method = RequestMethod.GET, produces = "application/json")
+	public String test() {
+		return dataSource.toString();
+	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
 	public String getAllPersons() {

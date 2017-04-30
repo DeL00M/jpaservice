@@ -7,28 +7,22 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.HttpMessageConverters;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.JpaVendorAdapter;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
-import org.springframework.transaction.PlatformTransactionManager;
-//import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.JpaVendorAdapter;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-
 @Configuration
 public class AppConfiguration {
-
+	
 	@Autowired
 	private Environment environment;
 
@@ -45,12 +39,12 @@ public class AppConfiguration {
 				environment.getRequiredProperty("hikari.prepStmtCacheSqlLimit"));
 		return new HikariDataSource(config);
 	}
-
+	
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws NamingException {
 		LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
 		factoryBean.setDataSource(dataSource());
-		factoryBean.setPackagesToScan(new String[] { "ru.deloom.jpaservice.entities" });
+		factoryBean.setPackagesToScan(new String[] { "ru.deloom.jpaservice" });
 		factoryBean.setJpaVendorAdapter(jpaVendorAdapter());
 		factoryBean.setJpaProperties(jpaProperties());
 		return factoryBean;
@@ -76,7 +70,7 @@ public class AppConfiguration {
 		properties.put("hibernate.format_sql", environment.getRequiredProperty("hibernate.format_sql"));
 		return properties;
 	}
-
+	
 	@Bean
 	@Autowired
 	public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
