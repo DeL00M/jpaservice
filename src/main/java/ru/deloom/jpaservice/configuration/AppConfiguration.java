@@ -15,20 +15,22 @@ import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 public class AppConfiguration {
-	
+
 	@Autowired
 	private Environment environment;
 
-	@Bean
+	@Bean(destroyMethod = "close")
 	public DataSource dataSource() {
 		HikariConfig config = new HikariConfig();
+		config.setDriverClassName("com.mysql.jdbc.Driver");
+		//config.addDataSourceProperty("poolName","jpaservicepool");
+		config.setPoolName("jpaservicepool");
 		config.setMaximumPoolSize(Integer.parseInt(environment.getRequiredProperty("hikari.MaximumPoolSize")));
 		config.setJdbcUrl(environment.getRequiredProperty("hikari.url"));
 		config.setUsername(environment.getRequiredProperty("hikari.username"));
@@ -39,7 +41,7 @@ public class AppConfiguration {
 				environment.getRequiredProperty("hikari.prepStmtCacheSqlLimit"));
 		return new HikariDataSource(config);
 	}
-	
+
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws NamingException {
 		LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
@@ -70,7 +72,7 @@ public class AppConfiguration {
 		properties.put("hibernate.format_sql", environment.getRequiredProperty("hibernate.format_sql"));
 		return properties;
 	}
-	
+
 	@Bean
 	@Autowired
 	public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {

@@ -19,13 +19,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EntityScan("ru.deloom.jpaservice.entities")
 @EnableJpaRepositories("ru.deloom.jpaservice.repositories")
 public class JpaserviceApplication extends SpringBootServletInitializer {
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(JpaserviceApplication.class, args);
 	}
-
+	
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(JpaserviceApplication.class) ;
+		return builder.sources(JpaserviceApplication.class);
 	}
 }
