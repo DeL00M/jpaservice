@@ -1,13 +1,17 @@
 package ru.deloom.jpaservice.entities;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Persons")
@@ -20,18 +24,32 @@ public class Persons implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
-	private Integer personId;
+	@Column(name = "id")
+	private Long id;
 
-	@Column(name = "Name", nullable = false)
+	@Column(name = "name", nullable = false, unique = true)
 	private String name;
+	
+	@JsonIgnore
+    @OneToMany(
+        targetEntity = Keywords.class,
+        mappedBy = "person"
+    )
+    private Set<Keywords> keywords;
+	
+	@JsonIgnore
+    @OneToMany(
+        targetEntity = PersonPageRank.class,
+        mappedBy = "person"
+    )
+    private Set<PersonPageRank> personPageRanks;
 
-	public Integer getPersonId() {
-		return personId;
+	public Long getPersonId() {
+		return id;
 	}
 
-	public void setPersonId(Integer personId) {
-		this.personId = personId;
+	public void setPersonId(Long personId) {
+		this.id = personId;
 	}
 
 	public String getName() {
