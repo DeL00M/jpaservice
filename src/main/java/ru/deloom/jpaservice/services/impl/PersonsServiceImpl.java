@@ -21,7 +21,7 @@ public class PersonsServiceImpl implements PersonsService {
 		return personsRepository.saveAndFlush(person);
 	}
 
-	public void delete(Integer id) {
+	public void delete(Long id) {
 		personsRepository.delete(id);
 	}
 
