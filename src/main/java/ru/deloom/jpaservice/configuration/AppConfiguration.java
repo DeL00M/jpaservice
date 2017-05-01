@@ -29,7 +29,6 @@ public class AppConfiguration {
 	public DataSource dataSource() {
 		HikariConfig config = new HikariConfig();
 		config.setDriverClassName("com.mysql.jdbc.Driver");
-		//config.addDataSourceProperty("poolName","jpaservicepool");
 		config.setPoolName("jpaservicepool");
 		config.setMaximumPoolSize(Integer.parseInt(environment.getRequiredProperty("hikari.MaximumPoolSize")));
 		config.setJdbcUrl(environment.getRequiredProperty("hikari.url"));
