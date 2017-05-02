@@ -20,32 +20,32 @@ public class PersonPageRank implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
-	private Integer PageRank;
+	@Column(name = "id")
+	private Long id;
 	
-	@Column(name = "PersonID")
-	private Integer personID;
+	@Column(name = "personId")
+	private Long personId;
 	
-	@Column(name = "PageID")
-	private Integer pageID;
+	@Column(name = "pageId")
+	private Long pageId;
 	
-	@Column(name = "Rank")
+	@Column(name = "rank")
 	private Integer rank;
 
-	public Integer getPersonID() {
-		return personID;
+	public Long getPersonId() {
+		return id;
 	}
 
-	public void setPersonID(Integer personID) {
-		this.personID = personID;
+	public void setPersonId(Long personId) {
+		this.personId = personId;
 	}
 
-	public Integer getPageID() {
-		return pageID;
+	public Long getPageId() {
+		return pageId;
 	}
 
-	public void setPageID(Integer pageID) {
-		this.pageID = pageID;
+	public void setPageId(Long pageID) {
+		this.pageId = pageID;
 	}
 
 	public Integer getRank() {

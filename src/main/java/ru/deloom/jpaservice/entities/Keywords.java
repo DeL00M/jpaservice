@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -14,27 +15,32 @@ import javax.persistence.Table;
 public class Keywords implements Serializable{
 
 	/**
-	 * serialVersionUID
+	 * serialVersionUIDs.
 	 */
 	private static final long serialVersionUID = 5976628831754685397L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
-	private Integer keywordId;
+	@Column(name = "id")
+	private Long id;
 	
-	@Column(name = "Name")
+	@Column(name = "name", unique = true)
 	private String name;
 	
-	@Column(name = "PersonID")
-	private Integer personId;
+	@Column(name = "personId")
+	private Long personId;
+	
+	@ManyToOne(
+	        targetEntity = Persons.class
+	    )
+	    private Persons persons;
 
-	public Integer getKeywordId() {
-		return keywordId;
+	public Long getKeywordId() {
+		return id;
 	}
 
-	public void setKeywordId(Integer keywordId) {
-		this.keywordId = keywordId;
+	public void setKeywordId(Long keywordId) {
+		this.id = keywordId;
 	}
 
 	public String getName() {
@@ -45,11 +51,11 @@ public class Keywords implements Serializable{
 		this.name = name;
 	}
 
-	public Integer getPersonId() {
+	public Long getPersonId() {
 		return personId;
 	}
 
-	public void setPersonId(Integer personId) {
+	public void setPersonId(Long personId) {
 		this.personId = personId;
 	}
 }

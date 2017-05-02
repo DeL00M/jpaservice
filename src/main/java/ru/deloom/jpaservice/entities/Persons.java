@@ -40,7 +40,7 @@ public class Persons implements Serializable{
 	@JsonIgnore
     @OneToMany(
         targetEntity = PersonPageRank.class,
-        mappedBy = "person"
+        mappedBy = "personId"
     )
     private Set<PersonPageRank> personPageRanks;
 

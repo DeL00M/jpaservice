@@ -23,14 +23,14 @@ public class Pages implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
-	private Integer pageId;
+	@Column(name = "id")
+	private Long id;
 	
-	@Column(name = "Url")
+	@Column(name = "Url", nullable = false, unique = true)
 	private String url;
 	
-	@Column(name = "SiteID")
-	private Integer siteID;
+	@Column(name = "siteId")
+	private Long siteId;
 	
 	@Column(name = "FoundDateTime", columnDefinition = "DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -40,12 +40,12 @@ public class Pages implements Serializable{
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastScanDate;
 
-	public Integer getPageId() {
-		return pageId;
+	public Long getPageId() {
+		return id;
 	}
 
-	public void setPageId(Integer pageId) {
-		this.pageId = pageId;
+	public void setPageId(Long pageId) {
+		this.id = pageId;
 	}
 
 	public String getUrl() {
@@ -56,12 +56,12 @@ public class Pages implements Serializable{
 		this.url = url;
 	}
 
-	public Integer getSiteID() {
-		return siteID;
+	public Long getSiteId() {
+		return siteId;
 	}
 
-	public void setSiteID(Integer siteID) {
-		this.siteID = siteID;
+	public void setSiteID(Long siteId) {
+		this.siteId = siteId;
 	}
 
 	public Date getFoundDateTime() {
