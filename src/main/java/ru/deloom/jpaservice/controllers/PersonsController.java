@@ -38,7 +38,7 @@ public class PersonsController {
 				: new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
-	@RequestMapping(value = { "/" }, method = { RequestMethod.POST })
+	@RequestMapping(value = { "/" }, method = RequestMethod.POST)
 	public ResponseEntity<Persons> add(@RequestBody Persons person) {
 		return personsService.addPerson(person).equals(person) ? new ResponseEntity<>(person, HttpStatus.CREATED)
 				: new ResponseEntity<>(person, HttpStatus.NOT_ACCEPTABLE);
