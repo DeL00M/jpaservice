@@ -1,7 +1,5 @@
 package ru.deloom.jpaservice.controllers;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,14 +18,6 @@ public class PersonsController {
 
 	@Autowired
 	private JsonConverter jsonConverter;
-	
-	@Autowired
-    DataSource dataSource;
-	
-	@RequestMapping(value = "/test", method = RequestMethod.GET, produces = "application/json")
-	public String test() {
-		return dataSource.toString();
-	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
 	public String getAllPersons() {
