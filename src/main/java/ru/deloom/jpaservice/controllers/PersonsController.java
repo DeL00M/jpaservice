@@ -39,14 +39,14 @@ public class PersonsController {
 
 	@RequestMapping(value = "/{name}", method = RequestMethod.POST)
 	public ResponseEntity<Boolean> add(@PathVariable("name") String name) {
-		return personsService.addPerson(name) ? new ResponseEntity<>(true, HttpStatus.OK)
-				: new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+		return personsService.addPerson(name) ? new ResponseEntity<>(true, HttpStatus.CREATED)
+				: new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
 	}
 	
 	@RequestMapping(value = "/{id}/{newname}", method = RequestMethod.PUT)
 	public ResponseEntity<Boolean> update(@PathVariable("id") Long id, @PathVariable("newname") String newname) {
 		return personsService.editPerson(id, newname) ? new ResponseEntity<>(true, HttpStatus.OK)
-				: new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+				: new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
 	}
 
 	/*
