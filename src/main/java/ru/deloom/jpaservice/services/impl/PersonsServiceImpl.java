@@ -19,25 +19,30 @@ public class PersonsServiceImpl implements PersonsService {
 	@Autowired
 	private PersonsRepository personsRepository;
 
+	@Override
 	public Boolean addPerson(String name) {
 		Persons person = new Persons(name);
 		return personsRepository.saveAndFlush(person).equals(person);
 	}
 
+	@Override
 	public void delete(Long id) {
 		personsRepository.delete(id);
 	}
 
+	@Override
 	@Transactional(readOnly = true)
 	public List<Persons> getByName(String name) {
 		return personsRepository.findByName(name);
 	}
 
+	@Override
 	public Boolean editPerson(Long id, String newname) {
-		Persons person = new Persons(id, newname);
-		return personsRepository.saveAndFlush(person).equals(person);
+		if (personsRepository.findOne(id) == null) return false;
+		return personsRepository.saveAndFlush(new Persons(id, newname)).getName().equals(newname);
 	}
 
+	@Override
 	@Transactional(readOnly = true)
 	public List<Persons> getAll() {
 		return personsRepository.findAll();
