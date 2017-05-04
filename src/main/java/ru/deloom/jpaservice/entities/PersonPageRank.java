@@ -7,12 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "PersonPageRank")
-public class PersonPageRank implements Serializable{
-	
+public class PersonPageRank implements Serializable {
+
 	/**
 	 * serialVersionUID
 	 */
@@ -22,30 +24,30 @@ public class PersonPageRank implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
-	
-	@Column(name = "personId")
+
+	/*@Column(name = "personId")
 	private Long personId;
-	
+
 	@Column(name = "pageId")
-	private Long pageId;
-	
+	private Long pageId;*/
+
 	@Column(name = "rank")
 	private Integer rank;
 
-	public Long getPersonId() {
+	@ManyToOne
+	@JoinColumn(name = "personId")
+	private Persons persons;
+
+	@ManyToOne
+	@JoinColumn(name = "pageId")
+	private Pages pages;
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setPersonId(Long personId) {
-		this.personId = personId;
-	}
-
-	public Long getPageId() {
-		return pageId;
-	}
-
-	public void setPageId(Long pageID) {
-		this.pageId = pageID;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Integer getRank() {
@@ -54,5 +56,21 @@ public class PersonPageRank implements Serializable{
 
 	public void setRank(Integer rank) {
 		this.rank = rank;
+	}
+
+	public Persons getPersons() {
+		return persons;
+	}
+
+	public void setPersons(Persons persons) {
+		this.persons = persons;
+	}
+
+	public Pages getPages() {
+		return pages;
+	}
+
+	public void setPages(Pages pages) {
+		this.pages = pages;
 	}
 }

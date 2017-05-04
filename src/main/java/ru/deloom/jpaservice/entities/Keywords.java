@@ -7,12 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Keywords")
-public class Keywords implements Serializable{
+public class Keywords implements Serializable {
 
 	/**
 	 * serialVersionUIDs.
@@ -23,24 +24,23 @@ public class Keywords implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
-	
+
 	@Column(name = "name", unique = true)
 	private String name;
-	
-	@Column(name = "personId")
-	private Long personId;
-	
-	@ManyToOne(
-	        targetEntity = Persons.class
-	    )
-	    private Persons persons;
 
-	public Long getKeywordId() {
+	/*@Column(name = "personId")
+	private Long personId;*/
+
+	@ManyToOne
+	@JoinColumn(name = "personId")
+	private Persons persons;
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setKeywordId(Long keywordId) {
-		this.id = keywordId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -51,11 +51,11 @@ public class Keywords implements Serializable{
 		this.name = name;
 	}
 
-	public Long getPersonId() {
-		return personId;
+	public Persons getPersons() {
+		return persons;
 	}
 
-	public void setPersonId(Long personId) {
-		this.personId = personId;
+	public void setPersons(Persons persons) {
+		this.persons = persons;
 	}
 }

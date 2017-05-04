@@ -1,8 +1,10 @@
 package ru.deloom.jpaservice.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,17 +13,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name = "Persons")
-public class Persons implements Serializable{
+public class Persons implements Serializable {
 
 	/**
 	 * serialVersionUID
 	 */
 	private static final long serialVersionUID = -4803092317061414070L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -29,27 +29,19 @@ public class Persons implements Serializable{
 
 	@Column(name = "name", nullable = false, unique = true)
 	private String name;
-	
-	@JsonIgnore
-    @OneToMany(
-        targetEntity = Keywords.class,
-        mappedBy = "person"
-    )
-    private Set<Keywords> keywords;
-	
-	@JsonIgnore
-    @OneToMany(
-        targetEntity = PersonPageRank.class,
-        mappedBy = "personId"
-    )
-    private Set<PersonPageRank> personPageRanks;
 
-	public Long getPersonId() {
+	@OneToMany(mappedBy = "persons", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<Keywords> keywords = new HashSet<Keywords>();
+
+	@OneToMany(mappedBy = "persons", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<PersonPageRank> personPageRanks = new HashSet<PersonPageRank>();
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setPersonId(Long personId) {
-		this.id = personId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -58,5 +50,21 @@ public class Persons implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Set<Keywords> getKeywords() {
+		return keywords;
+	}
+
+	public void setKeywords(Set<Keywords> keywords) {
+		this.keywords = keywords;
+	}
+
+	public Set<PersonPageRank> getPersonPageRanks() {
+		return personPageRanks;
+	}
+
+	public void setPersonPageRanks(Set<PersonPageRank> personPageRanks) {
+		this.personPageRanks = personPageRanks;
 	}
 }

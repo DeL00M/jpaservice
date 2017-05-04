@@ -2,20 +2,26 @@ package ru.deloom.jpaservice.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "Pages")
-public class Pages implements Serializable{
-	
+public class Pages implements Serializable {
+
 	/**
 	 * serialVersionUID
 	 */
@@ -25,27 +31,39 @@ public class Pages implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
-	
+
 	@Column(name = "Url", nullable = false, unique = true)
 	private String url;
-	
-	@Column(name = "siteId")
-	private Long siteId;
-	
+
 	@Column(name = "FoundDateTime", columnDefinition = "DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date foundDateTime;
-	
+
 	@Column(name = "LastScanDate", columnDefinition = "DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastScanDate;
 
-	public Long getPageId() {
+	@OneToMany(mappedBy = "pages", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<PersonPageRank> personPageRanks = new HashSet<PersonPageRank>();
+	
+	@ManyToOne
+	@JoinColumn(name = "siteId")
+	private Sites sites;
+	
+	public Sites getSites() {
+		return sites;
+	}
+
+	public void setSites(Sites sites) {
+		this.sites = sites;
+	}
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setPageId(Long pageId) {
-		this.id = pageId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getUrl() {
@@ -54,14 +72,6 @@ public class Pages implements Serializable{
 
 	public void setUrl(String url) {
 		this.url = url;
-	}
-
-	public Long getSiteId() {
-		return siteId;
-	}
-
-	public void setSiteID(Long siteId) {
-		this.siteId = siteId;
 	}
 
 	public Date getFoundDateTime() {
@@ -78,5 +88,13 @@ public class Pages implements Serializable{
 
 	public void setLastScanDate(Date lastScanDate) {
 		this.lastScanDate = lastScanDate;
+	}
+
+	public Set<PersonPageRank> getPersonPageRanks() {
+		return personPageRanks;
+	}
+
+	public void setPersonPageRanks(Set<PersonPageRank> personPageRanks) {
+		this.personPageRanks = personPageRanks;
 	}
 }
