@@ -10,7 +10,6 @@ import org.springframework.http.HttpEntity;*/
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,10 +37,10 @@ public class PersonsController {
 				: new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
-	@RequestMapping(value = { "/" }, method = RequestMethod.POST)
-	public ResponseEntity<Persons> add(@RequestBody Persons person) {
-		return personsService.addPerson(person).equals(person) ? new ResponseEntity<>(person, HttpStatus.CREATED)
-				: new ResponseEntity<>(person, HttpStatus.NOT_ACCEPTABLE);
+	@RequestMapping(value = "/{name}", method = RequestMethod.POST)
+	public ResponseEntity<Boolean> add(@PathVariable("name") String name) {
+		return personsService.addPerson(name) ? new ResponseEntity<>(true, HttpStatus.CREATED)
+				: new ResponseEntity<>(false, HttpStatus.NOT_ACCEPTABLE);
 	}
 
 	/*

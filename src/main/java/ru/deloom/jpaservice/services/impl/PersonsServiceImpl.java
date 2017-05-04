@@ -19,8 +19,9 @@ public class PersonsServiceImpl implements PersonsService {
 	@Autowired
 	private PersonsRepository personsRepository;
 
-	public Persons addPerson(Persons person) {
-		return personsRepository.saveAndFlush(person);
+	public Boolean addPerson(String name) {
+		Persons person = new Persons(name);
+		return personsRepository.saveAndFlush(person).equals(person);
 	}
 
 	public void delete(Long id) {

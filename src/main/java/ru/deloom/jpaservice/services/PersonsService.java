@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import ru.deloom.jpaservice.entities.Persons;
 
 public interface PersonsService {
-	Persons addPerson(Persons person);
+	Boolean addPerson(String name);
 	void delete(Long id);
 	List<Persons> getByName(String name);
 	Persons editPerson(Persons person);

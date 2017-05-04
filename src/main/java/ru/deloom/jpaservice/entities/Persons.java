@@ -24,6 +24,15 @@ public class Persons implements Serializable {
 	 */
 	private static final long serialVersionUID = -4803092317061414070L;
 
+	public Persons() {
+		
+	}
+	
+	public Persons(String name) {
+		super();
+		this.name = name;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
