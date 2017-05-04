@@ -11,7 +11,7 @@ public interface PersonsService {
 	Boolean addPerson(String name);
 	void delete(Long id);
 	List<Persons> getByName(String name);
-	Persons editPerson(Persons person);
+	Boolean editPerson(Long id, String newname);
 	List<Persons> getAll();
 	Page<Persons> getAllByPage(Pageable pageable);
 }

@@ -33,8 +33,9 @@ public class PersonsServiceImpl implements PersonsService {
 		return personsRepository.findByName(name);
 	}
 
-	public Persons editPerson(Persons person) {
-		return personsRepository.saveAndFlush(person);
+	public Boolean editPerson(Long id, String newname) {
+		Persons person = new Persons(id, newname);
+		return personsRepository.saveAndFlush(person).equals(person);
 	}
 
 	@Transactional(readOnly = true)
