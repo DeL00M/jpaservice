@@ -13,5 +13,6 @@ public interface PersonsService {
 	List<Persons> getByName(String name);
 	Boolean editPerson(Long id, String newname);
 	List<Persons> getAll();
+	Persons getById(Long id);
 	Page<Persons> getAllByPage(Pageable pageable);
 }

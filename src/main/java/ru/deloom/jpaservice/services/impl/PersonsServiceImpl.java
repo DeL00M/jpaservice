@@ -52,4 +52,9 @@ public class PersonsServiceImpl implements PersonsService {
 	public Page<Persons> getAllByPage(Pageable pageable) {
 		return personsRepository.findAll(pageable);
 	}
+
+	@Override
+	public Persons getById(Long id) {
+		return personsRepository.findOne(id);
+	}
 }

@@ -24,18 +24,25 @@ public class PersonsController {
 	@Autowired
 	private PersonsService personsService;
 
-	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
 	public HttpEntity<List<Persons>> getAllPersons() {
 		List<Persons> personsList = personsService.getAll();
 		return !personsList.isEmpty() ? new ResponseEntity<>(personsList, HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
-	@RequestMapping(value = "/{name}", method = RequestMethod.GET, produces = "application/json")
-	public HttpEntity<List<Persons>> getByName(@PathVariable("name") String name) {
+	/*@RequestMapping(method = RequestMethod.GET, produces = "application/json")
+	public HttpEntity<List<Persons>> getByName(@RequestParam(value = "name", required = true) String name) {
 		List<Persons> personsList = personsService.getByName(name);
 		return !personsList.isEmpty() ? new ResponseEntity<>(personsList, HttpStatus.OK)
 				: new ResponseEntity<>(personsList, HttpStatus.NOT_FOUND);
+	}*/
+	
+	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
+	public HttpEntity<Persons> getById(@RequestParam(value = "id", required = true) Long id) {
+		Persons persons = personsService.getById(id);
+		return persons != null ? new ResponseEntity<>(persons, HttpStatus.OK)
+				: new ResponseEntity<>(persons, HttpStatus.NOT_FOUND);
 	}
 
 	@RequestMapping(value = "/{name}", method = RequestMethod.POST)
