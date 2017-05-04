@@ -7,11 +7,14 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Persons")
@@ -30,9 +33,11 @@ public class Persons implements Serializable {
 	@Column(name = "name", nullable = false, unique = true)
 	private String name;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "persons", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Keywords> keywords = new HashSet<Keywords>();
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "persons", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<PersonPageRank> personPageRanks = new HashSet<PersonPageRank>();
 
