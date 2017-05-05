@@ -25,11 +25,23 @@ public class Keywords implements Serializable {
 	@Column(name = "id")
 	private Long id;
 
+	public Keywords(String name) {
+		super();
+		this.name = name;
+	}
+	
+	public Keywords(Long id, String name) {
+		super();
+		this.name = name;
+		this.id = id;
+	}
+	
+	public Keywords() {
+
+	}
+
 	@Column(name = "name", unique = true)
 	private String name;
-
-	/*@Column(name = "personId")
-	private Long personId;*/
 
 	@ManyToOne
 	@JoinColumn(name = "personId")

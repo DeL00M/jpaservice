@@ -69,7 +69,7 @@ public class PersonsController {
 	 */
 	@RequestMapping(value = "/add/name/{name}", method = RequestMethod.POST)
 	public HttpEntity<Boolean> add(@PathVariable("name") String name) {
-		return personsService.addPerson(name) ? new ResponseEntity<>(true, HttpStatus.CREATED)
+		return personsService.add(name) ? new ResponseEntity<>(true, HttpStatus.CREATED)
 				: new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
 	}
 
@@ -82,7 +82,7 @@ public class PersonsController {
 	 */
 	@RequestMapping(value = "/edit/id/{id}/{name}", method = RequestMethod.PATCH)
 	public HttpEntity<Boolean> update(@PathVariable("id") Long id, @PathVariable("name") String name) {
-		return personsService.editPerson(id, name) ? new ResponseEntity<>(true, HttpStatus.OK)
+		return personsService.edit(id, name) ? new ResponseEntity<>(true, HttpStatus.OK)
 				: new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
 	}
 	

@@ -3,8 +3,8 @@ package ru.deloom.jpaservice.services.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+/*import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;*/
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +20,7 @@ public class PersonsServiceImpl implements PersonsService {
 	private PersonsRepository personsRepository;
 
 	@Override
-	public Boolean addPerson(String name) {
+	public Boolean add(String name) {
 		Persons person = new Persons(name);
 		return personsRepository.saveAndFlush(person).equals(person);
 	}
@@ -37,7 +37,7 @@ public class PersonsServiceImpl implements PersonsService {
 	}
 
 	@Override
-	public Boolean editPerson(Long id, String newname) {
+	public Boolean edit(Long id, String newname) {
 		if (!personsRepository.exists(id)) return false;
 		return personsRepository.saveAndFlush(new Persons(id, newname)).getName().equals(newname);
 	}
@@ -48,17 +48,19 @@ public class PersonsServiceImpl implements PersonsService {
 		return personsRepository.findAll();
 	}
 
-	@Override
+	/*@Override
 	public Page<Persons> getAllByPage(Pageable pageable) {
 		return personsRepository.findAll(pageable);
-	}
+	}*/
 
 	@Override
+	@Transactional(readOnly = true)
 	public Persons getById(Long id) {
 		return personsRepository.findOne(id);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Boolean exist(Long id) {
 		return personsRepository.exists(id);
 	}
