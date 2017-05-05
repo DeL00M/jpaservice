@@ -48,11 +48,7 @@ public class Sites implements Serializable {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "sites", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<Pages> Pages = new HashSet<Pages>();
-	
-	public String getName() {
-		return name;
-	}
+	private Set<Pages> pages = new HashSet<Pages>();
 
 	public Long getId() {
 		return id;
@@ -62,15 +58,19 @@ public class Sites implements Serializable {
 		this.id = id;
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	public Set<Pages> getPages() {
-		return Pages;
+		return pages;
 	}
 
 	public void setPages(Set<Pages> pages) {
-		Pages = pages;
+		this.pages = pages;
 	}
 }

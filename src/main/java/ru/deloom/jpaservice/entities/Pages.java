@@ -45,11 +45,9 @@ public class Pages implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastScanDate;
 
-	@JsonIgnore
 	@OneToMany(mappedBy = "pages", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<PersonPageRank> personPageRanks = new HashSet<PersonPageRank>();
 	
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "siteId")
 	private Sites sites;
