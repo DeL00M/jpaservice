@@ -15,10 +15,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ru.deloom.jpaservice.entities.Persons;
 import ru.deloom.jpaservice.services.PersonsService;
+import ru.deloom.jpaservice.services.Service;
 
 @RestController
 @RequestMapping(value = "/persons")
-public class PersonsController {
+public class PersonsController extends Controller{
+
+	@Autowired
+	public PersonsController(PersonsService service) {
+		super(service);
+	}
 
 	/*@Autowired
 	private PersonsService personsService;

@@ -21,13 +21,12 @@ import ru.deloom.jpaservice.services.impl.SitesServiceImpl;
 @RequestMapping(value = "/sites")
 public class SitesController extends Controller {
 
-	/*@Autowired
-	private SitesService service;
+	@Autowired
+	public SitesController(SitesService service) {
+		super(service);
+	}
 	
-	
-	public SitesController() {
-		super.service = this.service;
-	}*/
+
 
 	/*@RequestMapping(value = "/name/{name}", method = RequestMethod.GET, produces = "application/json")
 	public HttpEntity<List<Sites>> getByName(@PathVariable("name") String name) {

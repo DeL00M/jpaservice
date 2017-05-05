@@ -3,7 +3,6 @@ package ru.deloom.jpaservice.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,12 +11,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import ru.deloom.jpaservice.entities.Model;
 import ru.deloom.jpaservice.services.Service;
-import ru.deloom.jpaservice.services.impl.SitesServiceImpl;
 
 public class Controller {
 
-	@Autowired
+	//@Autowired
 	public Service service;
+
+	public Controller(Service service) {
+		super();
+		this.service = service;
+	}
 
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
 	public HttpEntity<List<? extends Model>> getAll() {
