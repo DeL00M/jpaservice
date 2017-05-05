@@ -22,7 +22,7 @@ public class KeywordsController {
 	private KeywordsService keywordsService;
 	
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
-	public HttpEntity<List<Keywords>> getAllPersons() {
+	public HttpEntity<List<Keywords>> getAll() {
 		List<Keywords> keywordsList = keywordsService.getAll();
 		return !keywordsList.isEmpty() ? new ResponseEntity<>(keywordsList, HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.NOT_FOUND);

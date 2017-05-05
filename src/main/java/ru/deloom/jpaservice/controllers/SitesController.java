@@ -22,7 +22,7 @@ public class SitesController {
 	private SitesService sitesService;
 	
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
-	public HttpEntity<List<Sites>> getAllPersons() {
+	public HttpEntity<List<Sites>> getAll() {
 		List<Sites> sitesList = sitesService.getAll();
 		return !sitesList.isEmpty() ? new ResponseEntity<>(sitesList, HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.NOT_FOUND);
