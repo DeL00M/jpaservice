@@ -47,7 +47,7 @@ public class Keywords extends Model implements Serializable {
 
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name = "personId")
+	@JoinColumn(name = "person_id", nullable = false)
 	private Persons persons;
 
 	public Integer getId() {
