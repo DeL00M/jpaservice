@@ -17,19 +17,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Sites")
-public class Sites implements Serializable {
+public class Sites extends Model implements Serializable{
 
 	/**
 	 * serialVersionUID
 	 */
 	private static final long serialVersionUID = 3800960441052181181L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Long id;
-
-	public Sites(Long id, String name) {
+	
+	public Sites(Integer id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -43,23 +38,28 @@ public class Sites implements Serializable {
 	public Sites() {
 	}
 
-	@Column(name = "Name")
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Integer id;
+
+	@Column(name = "name", length = 2048, nullable = false)
 	private String name;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "sites", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Pages> pages = new HashSet<Pages>();
-	
-	public String getName() {
-		return name;
-	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public void setName(String name) {

@@ -6,10 +6,10 @@ import ru.deloom.jpaservice.entities.Model;
 
 public interface Service {
 	Boolean add(String name);
-	Boolean exist(Long id);
-	void delete(Long id);
-	Boolean edit(Long id, String newname);
+	Boolean exist(Integer id);
+	void delete(Integer id);
+	Boolean edit(Integer id, String newname);
 	List<? extends Model> getByName(String name);
 	List<? extends Model> getAll();
-	Model getById(Long id);
+	Model getById(Integer id);
 }

@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Persons")
-public class Persons implements Serializable {
+public class Persons extends Model implements Serializable {
 
 	/**
 	 * serialVersionUID
@@ -28,7 +28,7 @@ public class Persons implements Serializable {
 
 	}
 
-	public Persons(Long id, String name) {
+	public Persons(Integer id, String name) {
 		super();
 		this.name = name;
 		this.id = id;
@@ -41,9 +41,9 @@ public class Persons implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private Long id;
+	private Integer id;
 
-	@Column(name = "name", nullable = false, unique = true)
+	@Column(name = "name", length = 2048, nullable = false)
 	private String name;
 
 	@JsonIgnore
@@ -54,11 +54,11 @@ public class Persons implements Serializable {
 	@OneToMany(mappedBy = "persons", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<PersonPageRank> personPageRanks = new HashSet<PersonPageRank>();
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

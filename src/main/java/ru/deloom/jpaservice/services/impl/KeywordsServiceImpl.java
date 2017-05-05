@@ -25,17 +25,17 @@ public class KeywordsServiceImpl implements KeywordsService{
 
 	@Override
 	@Transactional(readOnly = true)
-	public Boolean exist(Long id) {
+	public Boolean exist(Integer id) {
 		return keywordsRepository.exists(id);
 	}
 
 	@Override
-	public void delete(Long id) {
+	public void delete(Integer id) {
 		keywordsRepository.delete(id);
 	}
 
 	@Override
-	public Boolean edit(Long id, String newname) {
+	public Boolean edit(Integer id, String newname) {
 		if (!keywordsRepository.exists(id)) return false;
 		return keywordsRepository.saveAndFlush(new Keywords(id, newname)).getName().equals(newname);
 	}
@@ -54,7 +54,7 @@ public class KeywordsServiceImpl implements KeywordsService{
 
 	@Override
 	@Transactional(readOnly = true)
-	public Keywords getById(Long id) {
+	public Keywords getById(Integer id) {
 		return keywordsRepository.findOne(id);
 	}
 

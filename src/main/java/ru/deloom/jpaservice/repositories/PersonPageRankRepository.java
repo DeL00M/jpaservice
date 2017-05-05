@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import ru.deloom.jpaservice.entities.PersonPageRank;
 
-public interface PersonPageRankRepository extends JpaRepository<PersonPageRank, Long>{
+public interface PersonPageRankRepository extends JpaRepository<PersonPageRank, Integer>{
 	
 }

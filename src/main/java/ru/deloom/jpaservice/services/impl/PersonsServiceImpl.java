@@ -26,7 +26,7 @@ public class PersonsServiceImpl implements PersonsService {
 	}
 
 	@Override
-	public void delete(Long id) {
+	public void delete(Integer id) {
 		personsRepository.delete(id);
 	}
 
@@ -37,7 +37,7 @@ public class PersonsServiceImpl implements PersonsService {
 	}
 
 	@Override
-	public Boolean edit(Long id, String newname) {
+	public Boolean edit(Integer id, String newname) {
 		if (!personsRepository.exists(id)) return false;
 		return personsRepository.saveAndFlush(new Persons(id, newname)).getName().equals(newname);
 	}
@@ -55,13 +55,13 @@ public class PersonsServiceImpl implements PersonsService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Persons getById(Long id) {
+	public Persons getById(Integer id) {
 		return personsRepository.findOne(id);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Boolean exist(Long id) {
+	public Boolean exist(Integer id) {
 		return personsRepository.exists(id);
 	}
 }

@@ -35,7 +35,7 @@ public class Controller {
 	}
 
 	@RequestMapping(value = "/id/{id}", method = RequestMethod.GET, produces = "application/json")
-	public HttpEntity<? extends Model> getById(@PathVariable("id") Long id) {
+	public HttpEntity<? extends Model> getById(@PathVariable("id") Integer id) {
 		Model sites = service.getById(id);
 		return sites != null ? new ResponseEntity<>(sites, HttpStatus.OK)
 				: new ResponseEntity<>(sites, HttpStatus.NOT_FOUND);
@@ -48,13 +48,13 @@ public class Controller {
 	}
 
 	@RequestMapping(value = "/edit/id/{id}/{name}", method = RequestMethod.PATCH)
-	public HttpEntity<Boolean> update(@PathVariable("id") Long id, @PathVariable("name") String name) {
+	public HttpEntity<Boolean> update(@PathVariable("id") Integer id, @PathVariable("name") String name) {
 		return service.edit(id, name) ? new ResponseEntity<>(true, HttpStatus.OK)
 				: new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
 	}
 
 	@RequestMapping(value = "/delete/id/{id}", method = RequestMethod.DELETE)
-	public HttpEntity<Boolean> delete(@PathVariable("id") Long id) {
+	public HttpEntity<Boolean> delete(@PathVariable("id") Integer id) {
 		if (service.exist(id)) {
 			service.delete(id);
 			return new ResponseEntity<>(true, HttpStatus.OK);

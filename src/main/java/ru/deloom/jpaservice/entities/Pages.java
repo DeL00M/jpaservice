@@ -18,11 +18,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name = "Pages")
-public class Pages implements Serializable {
+public class Pages extends Model implements Serializable {
 
 	/**
 	 * serialVersionUID
@@ -32,7 +30,7 @@ public class Pages implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private Long id;
+	private Integer id;
 
 	@Column(name = "Url", nullable = false, unique = true)
 	private String url;
@@ -45,11 +43,9 @@ public class Pages implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastScanDate;
 
-	@JsonIgnore
 	@OneToMany(mappedBy = "pages", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<PersonPageRank> personPageRanks = new HashSet<PersonPageRank>();
 	
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "siteId")
 	private Sites sites;
@@ -62,11 +58,11 @@ public class Pages implements Serializable {
 		this.sites = sites;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

@@ -25,17 +25,17 @@ public class SitesServiceImpl implements SitesService{
 
 	@Override
 	@Transactional(readOnly = true)
-	public Boolean exist(Long id) {
+	public Boolean exist(Integer id) {
 		return sitesRepository.exists(id);
 	}
 
 	@Override
-	public void delete(Long id) {
+	public void delete(Integer id) {
 		sitesRepository.delete(id);
 	}
 
 	@Override
-	public Boolean edit(Long id, String newname) {
+	public Boolean edit(Integer id, String newname) {
 		if (!sitesRepository.exists(id)) return false;
 		return sitesRepository.saveAndFlush(new Sites(id, newname)).getName().equals(newname);
 	}
@@ -54,7 +54,7 @@ public class SitesServiceImpl implements SitesService{
 
 	@Override
 	@Transactional(readOnly = true)
-	public Sites getById(Long id) {
+	public Sites getById(Integer id) {
 		return sitesRepository.findOne(id);
 	}
 

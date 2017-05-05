@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import ru.deloom.jpaservice.entities.Sites;
 
-public interface SitesRepository extends JpaRepository<Sites, Long>{
+public interface SitesRepository extends JpaRepository<Sites, Integer>{
 	List<Sites> findByName(String name);
 }

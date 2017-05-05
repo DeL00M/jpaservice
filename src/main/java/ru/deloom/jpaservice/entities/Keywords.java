@@ -15,24 +15,19 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Keywords")
-public class Keywords implements Serializable {
+public class Keywords extends Model implements Serializable {
 
 	/**
 	 * serialVersionUIDs.
 	 */
 	private static final long serialVersionUID = 5976628831754685397L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Long id;
-
+	
 	public Keywords(String name) {
 		super();
 		this.name = name;
 	}
 	
-	public Keywords(Long id, String name) {
+	public Keywords(Integer id, String name) {
 		super();
 		this.name = name;
 		this.id = id;
@@ -42,7 +37,12 @@ public class Keywords implements Serializable {
 
 	}
 
-	@Column(name = "name", unique = true)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Integer id;
+
+	@Column(name = "name", length = 2048, nullable = false)
 	private String name;
 
 	@JsonIgnore
@@ -50,11 +50,11 @@ public class Keywords implements Serializable {
 	@JoinColumn(name = "personId")
 	private Persons persons;
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
