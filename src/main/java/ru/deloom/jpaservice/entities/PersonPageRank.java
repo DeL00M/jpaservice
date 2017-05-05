@@ -25,12 +25,6 @@ public class PersonPageRank implements Serializable {
 	@Column(name = "id")
 	private Long id;
 
-	/*@Column(name = "personId")
-	private Long personId;
-
-	@Column(name = "pageId")
-	private Long pageId;*/
-
 	@Column(name = "rank")
 	private Integer rank;
 
