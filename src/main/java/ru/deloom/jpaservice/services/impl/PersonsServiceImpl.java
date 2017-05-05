@@ -38,7 +38,7 @@ public class PersonsServiceImpl implements PersonsService {
 
 	@Override
 	public Boolean editPerson(Long id, String newname) {
-		if (personsRepository.findOne(id) == null) return false;
+		if (!personsRepository.exists(id)) return false;
 		return personsRepository.saveAndFlush(new Persons(id, newname)).getName().equals(newname);
 	}
 
@@ -56,5 +56,10 @@ public class PersonsServiceImpl implements PersonsService {
 	@Override
 	public Persons getById(Long id) {
 		return personsRepository.findOne(id);
+	}
+
+	@Override
+	public Boolean exist(Long id) {
+		return personsRepository.exists(id);
 	}
 }

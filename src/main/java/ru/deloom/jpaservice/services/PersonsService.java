@@ -9,6 +9,7 @@ import ru.deloom.jpaservice.entities.Persons;
 
 public interface PersonsService {
 	Boolean addPerson(String name);
+	Boolean exist(Long id);
 	void delete(Long id);
 	List<Persons> getByName(String name);
 	Boolean editPerson(Long id, String newname);

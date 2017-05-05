@@ -85,6 +85,21 @@ public class PersonsController {
 		return personsService.editPerson(id, name) ? new ResponseEntity<>(true, HttpStatus.OK)
 				: new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
 	}
+	
+	/**
+	 * DELETE %APP%/persons/delete/id/{id}
+	 * @param id
+	 * @return Boolean
+	 * delete person from table "persons" with id = {id}
+	 */
+	@RequestMapping(value = "/delete/id/{id}", method = RequestMethod.DELETE)
+	public HttpEntity<Boolean> delete(@PathVariable("id") Long id) {
+		if (personsService.exist(id)) {
+			personsService.delete(id);
+			return new ResponseEntity<>(true, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+	}
 
 	/*
 	 * @RequestMapping(value = "", method = RequestMethod.GET, produces =
