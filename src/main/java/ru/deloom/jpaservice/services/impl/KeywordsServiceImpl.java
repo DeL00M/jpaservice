@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ru.deloom.jpaservice.entities.Keywords;
-import ru.deloom.jpaservice.entities.KeywordsService;
+import ru.deloom.jpaservice.services.KeywordsService;
 import ru.deloom.jpaservice.repositories.KeywordsRepository;
 
 @Service

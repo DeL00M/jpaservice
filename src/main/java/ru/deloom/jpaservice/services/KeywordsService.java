@@ -1,6 +1,8 @@
-package ru.deloom.jpaservice.entities;
+package ru.deloom.jpaservice.services;
 
 import java.util.List;
+
+import ru.deloom.jpaservice.entities.Keywords;
 
 public interface KeywordsService {
 	Boolean add(String name);
