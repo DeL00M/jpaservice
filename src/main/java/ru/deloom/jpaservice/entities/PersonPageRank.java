@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "PersonPageRank")
-public class PersonPageRank implements Serializable {
+public class PersonPageRank extends Model implements Serializable {
 
 	/**
 	 * serialVersionUID
