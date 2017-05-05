@@ -18,7 +18,7 @@ import ru.deloom.jpaservice.services.KeywordsService;
 @RequestMapping(value = "/keywords")
 public class KeywordsController {
 	
-	/*@Autowired
+	@Autowired
 	private KeywordsService keywordsService;
 	
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
@@ -62,5 +62,5 @@ public class KeywordsController {
 		}
 		return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
 	}
-*/
+
 }

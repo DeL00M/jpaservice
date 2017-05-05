@@ -11,25 +11,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import ru.deloom.jpaservice.entities.Model;
 import ru.deloom.jpaservice.entities.Sites;
-import ru.deloom.jpaservice.services.Service;
 import ru.deloom.jpaservice.services.SitesService;
-import ru.deloom.jpaservice.services.impl.SitesServiceImpl;
 
 @RestController
 @RequestMapping(value = "/sites")
-public class SitesController extends Controller {
-
-	/*@Autowired
-	private SitesService service;
+public class SitesController {
 	
+	@Autowired
+	private SitesService sitesService;
 	
-	public SitesController() {
-		super.service = this.service;
-	}*/
-
-	/*@RequestMapping(value = "/name/{name}", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
+	public HttpEntity<List<Sites>> getAll() {
+		List<Sites> sitesList = sitesService.getAll();
+		return !sitesList.isEmpty() ? new ResponseEntity<>(sitesList, HttpStatus.OK)
+				: new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+	
+	@RequestMapping(value = "/name/{name}", method = RequestMethod.GET, produces = "application/json")
 	public HttpEntity<List<Sites>> getByName(@PathVariable("name") String name) {
 		List<Sites> sitesList= sitesService.getByName(name);
 		return !sitesList.isEmpty() ? new ResponseEntity<>(sitesList, HttpStatus.OK)
@@ -62,5 +61,5 @@ public class SitesController extends Controller {
 			return new ResponseEntity<>(true, HttpStatus.OK);
 		}
 		return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
-	}*/
+	}
 }
