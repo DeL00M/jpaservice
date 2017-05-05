@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Keywords")
 public class Keywords implements Serializable {
@@ -43,6 +45,7 @@ public class Keywords implements Serializable {
 	@Column(name = "name", unique = true)
 	private String name;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "personId")
 	private Persons persons;
