@@ -62,12 +62,12 @@ public class PersonsController {
 	}
 
 	/**
-	 * POST %APP%/persons/add/{name}
+	 * POST %APP%/persons/add/name/{name}
 	 * @param name
 	 * @return Boolean
 	 * add new person in table "persons" with name = @param {name}
 	 */
-	@RequestMapping(value = "/add/{name}", method = RequestMethod.POST)
+	@RequestMapping(value = "/add/name/{name}", method = RequestMethod.POST)
 	public HttpEntity<Boolean> add(@PathVariable("name") String name) {
 		return personsService.addPerson(name) ? new ResponseEntity<>(true, HttpStatus.CREATED)
 				: new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
