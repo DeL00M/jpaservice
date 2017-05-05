@@ -48,7 +48,7 @@ public class Sites implements Serializable {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "sites", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<Pages> Pages = new HashSet<Pages>();
+	private Set<Pages> pages = new HashSet<Pages>();
 	
 	public String getName() {
 		return name;
@@ -67,10 +67,10 @@ public class Sites implements Serializable {
 	}
 
 	public Set<Pages> getPages() {
-		return Pages;
+		return pages;
 	}
 
 	public void setPages(Set<Pages> pages) {
-		Pages = pages;
+		this.pages = pages;
 	}
 }
