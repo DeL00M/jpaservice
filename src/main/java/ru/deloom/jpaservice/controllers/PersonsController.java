@@ -20,14 +20,14 @@ import ru.deloom.jpaservice.services.PersonsService;
 @RequestMapping(value = "/persons")
 public class PersonsController {
 
-	@Autowired
+	/*@Autowired
 	private PersonsService personsService;
 
-	/**
+	*//**
 	 * GET %APP%/persons
 	 * @return List<Persons>
 	 * all content from table "persons" in json format
-	 */
+	 *//*
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
 	public HttpEntity<List<Persons>> getAllPersons() {
 		List<Persons> personsList = personsService.getAll();
@@ -35,12 +35,12 @@ public class PersonsController {
 				: new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
-	/**
+	*//**
 	 * GET %APP%/persons/name/{name}
 	 * @param name
 	 * @return List<Persons>
 	 * content from table persons where column name = @param {name}
-	 */
+	 *//*
 	@RequestMapping(value = "/name/{name}", method = RequestMethod.GET, produces = "application/json")
 	public HttpEntity<List<Persons>> getByName(@PathVariable("name") String name) {
 		List<Persons> personsList = personsService.getByName(name);
@@ -48,12 +48,12 @@ public class PersonsController {
 				: new ResponseEntity<>(personsList, HttpStatus.NOT_FOUND);
 	}
 
-	/**
+	*//**
 	 * GET %APP%/persons/id/{id}
 	 * @param id
 	 * @return Persons
 	 * content from table persons where column id = @param {id}
-	 */
+	 *//*
 	@RequestMapping(value = "/id/{id}", method = RequestMethod.GET, produces = "application/json")
 	public HttpEntity<Persons> getById(@PathVariable("id") Long id) {
 		Persons persons = personsService.getById(id);
@@ -61,37 +61,37 @@ public class PersonsController {
 				: new ResponseEntity<>(persons, HttpStatus.NOT_FOUND);
 	}
 
-	/**
+	*//**
 	 * POST %APP%/persons/add/name/{name}
 	 * @param name
 	 * @return Boolean
 	 * add new person in table "persons" with name = @param {name}
-	 */
+	 *//*
 	@RequestMapping(value = "/add/name/{name}", method = RequestMethod.POST)
 	public HttpEntity<Boolean> add(@PathVariable("name") String name) {
 		return personsService.add(name) ? new ResponseEntity<>(true, HttpStatus.CREATED)
 				: new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
 	}
 
-	/**
+	*//**
 	 * PATCH %APP%/persons/id/{id}/{name}
 	 * @param id
 	 * @param name
 	 * @return Boolean
 	 * edit person in table "persons" with id = {id}, set name to {name}
-	 */
+	 *//*
 	@RequestMapping(value = "/edit/id/{id}/{name}", method = RequestMethod.PATCH)
 	public HttpEntity<Boolean> update(@PathVariable("id") Long id, @PathVariable("name") String name) {
 		return personsService.edit(id, name) ? new ResponseEntity<>(true, HttpStatus.OK)
 				: new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
 	}
 	
-	/**
+	*//**
 	 * DELETE %APP%/persons/delete/id/{id}
 	 * @param id
 	 * @return Boolean
 	 * delete person from table "persons" with id = {id}
-	 */
+	 *//*
 	@RequestMapping(value = "/delete/id/{id}", method = RequestMethod.DELETE)
 	public HttpEntity<Boolean> delete(@PathVariable("id") Long id) {
 		if (personsService.exist(id)) {
@@ -101,7 +101,7 @@ public class PersonsController {
 		return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
 	}
 
-	/*
+	
 	 * @RequestMapping(value = "", method = RequestMethod.GET, produces =
 	 * "application/json") HttpEntity<Page<Persons>> getAllPersons(Pageable
 	 * pageable) { Page<Persons> personsPage =
