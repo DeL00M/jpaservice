@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Sites")
 public class Sites implements Serializable {
@@ -44,6 +46,7 @@ public class Sites implements Serializable {
 	@Column(name = "Name")
 	private String name;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "sites", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Pages> Pages = new HashSet<Pages>();
 	
