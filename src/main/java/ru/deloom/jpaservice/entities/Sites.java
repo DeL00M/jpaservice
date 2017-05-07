@@ -17,24 +17,24 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Sites")
-public class Sites extends Model implements Serializable{
+public class Sites extends Model implements Serializable {
 
 	/**
 	 * serialVersionUID
 	 */
 	private static final long serialVersionUID = 3800960441052181181L;
-	
+
 	public Sites(Integer id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
 	}
-	
+
 	public Sites(String name) {
 		super();
 		this.name = name;
 	}
-	
+
 	public Sites() {
 	}
 
@@ -43,9 +43,42 @@ public class Sites extends Model implements Serializable{
 	@Column(name = "id")
 	private Integer id;
 
-	@Column(name = "name", length = 2048, nullable = false)
+	@Column(name = "name", length = 256, nullable = false)
 	private String name;
-	
+
+	@Column(name = "base_url", length = 2048)
+	private String baseUrl;
+
+	@Column(name = "open_tag", length = 512)
+	private String openTag;
+
+	@Column(name = "close_tag", length = 512)
+	private String closeTag;
+
+	public String getBaseUrl() {
+		return baseUrl;
+	}
+
+	public void setBaseUrl(String baseUrl) {
+		this.baseUrl = baseUrl;
+	}
+
+	public String getOpenTag() {
+		return openTag;
+	}
+
+	public void setOpenTag(String openTag) {
+		this.openTag = openTag;
+	}
+
+	public String getCloseTag() {
+		return closeTag;
+	}
+
+	public void setCloseTag(String closeTag) {
+		this.closeTag = closeTag;
+	}
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "sites", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Pages> pages = new HashSet<Pages>();

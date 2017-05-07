@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -32,30 +33,46 @@ public class Pages extends Model implements Serializable {
 	@Column(name = "id")
 	private Integer id;
 
-	@Column(name = "Url", nullable = false, unique = true)
+	@Column(name = "url", nullable = false, unique = true, length = 2048)
 	private String url;
 
-	@Column(name = "FoundDateTime", columnDefinition = "DATETIME")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date foundDateTime;
+	@Lob
+	@Column(name = "text")
+	private String text;
 
-	@Column(name = "LastScanDate", columnDefinition = "DATETIME")
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	@Column(name = "modified", columnDefinition = "DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date lastScanDate;
+	private Date modified;
 
 	@OneToMany(mappedBy = "pages", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<PersonPageRank> personPageRanks = new HashSet<PersonPageRank>();
-	
+
 	@ManyToOne
-	@JoinColumn(name = "siteId")
+	@JoinColumn(name = "site_id")
 	private Sites sites;
-	
+
 	public Sites getSites() {
 		return sites;
 	}
 
 	public void setSites(Sites sites) {
 		this.sites = sites;
+	}
+
+	public Date getModified() {
+		return modified;
+	}
+
+	public void setModified(Date modified) {
+		this.modified = modified;
 	}
 
 	public Integer getId() {
@@ -72,22 +89,6 @@ public class Pages extends Model implements Serializable {
 
 	public void setUrl(String url) {
 		this.url = url;
-	}
-
-	public Date getFoundDateTime() {
-		return foundDateTime;
-	}
-
-	public void setFoundDateTime(Date foundDateTime) {
-		this.foundDateTime = foundDateTime;
-	}
-
-	public Date getLastScanDate() {
-		return lastScanDate;
-	}
-
-	public void setLastScanDate(Date lastScanDate) {
-		this.lastScanDate = lastScanDate;
 	}
 
 	public Set<PersonPageRank> getPersonPageRanks() {
