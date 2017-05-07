@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "PersonPageRank")
+@Table(name = "person_page_rank")
 @IdClass(PageRankId.class)
 public class PersonPageRank extends Model implements Serializable {
 

@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "Sites")
+@Table(name = "sites")
 public class Sites extends Model implements Serializable {
 
 	/**
