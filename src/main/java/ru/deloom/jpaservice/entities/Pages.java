@@ -23,6 +23,17 @@ import javax.persistence.TemporalType;
 @Table(name = "pages")
 public class Pages extends IEntity implements Serializable {
 
+	public Pages(String url, String text, Date modified) {
+		super();
+		this.url = url;
+		this.text = text;
+		this.modified = modified;
+	}
+	
+	public Pages() {
+		
+	}
+
 	/**
 	 * serialVersionUID
 	 */
