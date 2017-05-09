@@ -57,7 +57,7 @@ public class PagesServiceImpl implements PagesService{
 	@Override
 	@Transactional(readOnly = true)
 	public Pages getById(Integer id) {
-		return pagesRepository.findOne(id);
+		return pagesRepository.getOne(id);
 	}
 
 }

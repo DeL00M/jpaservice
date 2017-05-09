@@ -55,6 +55,26 @@ public class Sites extends IEntity implements Serializable {
 	@Column(name = "close_tag", length = 512)
 	private String closeTag;
 
+	@JsonIgnore
+	@OneToMany(mappedBy = "sites", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<Pages> pages = new HashSet<Pages>();
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public String getBaseUrl() {
 		return baseUrl;
 	}
@@ -77,26 +97,6 @@ public class Sites extends IEntity implements Serializable {
 
 	public void setCloseTag(String closeTag) {
 		this.closeTag = closeTag;
-	}
-
-	@JsonIgnore
-	@OneToMany(mappedBy = "sites", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<Pages> pages = new HashSet<Pages>();
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public Set<Pages> getPages() {

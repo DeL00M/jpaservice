@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,12 +20,17 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "pages")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Pages extends IEntity implements Serializable {
 
 	public Pages(String url, String text, Date modified) {
 		super();
+		//this.id = id;
 		this.url = url;
 		this.text = text;
 		this.modified = modified;
@@ -51,40 +57,18 @@ public class Pages extends IEntity implements Serializable {
 	@Column(name = "text")
 	private String text;
 
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
-
 	@Column(name = "modified", columnDefinition = "DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date modified;
 
-	@OneToMany(mappedBy = "pages", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonIgnore
+	@OneToMany(mappedBy = "pages")
 	private Set<PersonPageRank> personPageRanks = new HashSet<PersonPageRank>();
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "site_id")
 	private Sites sites;
-
-	public Sites getSites() {
-		return sites;
-	}
-
-	public void setSites(Sites sites) {
-		this.sites = sites;
-	}
-
-	public Date getModified() {
-		return modified;
-	}
-
-	public void setModified(Date modified) {
-		this.modified = modified;
-	}
 
 	public Integer getId() {
 		return id;
@@ -102,11 +86,35 @@ public class Pages extends IEntity implements Serializable {
 		this.url = url;
 	}
 
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public Date getModified() {
+		return modified;
+	}
+
+	public void setModified(Date modified) {
+		this.modified = modified;
+	}
+
 	public Set<PersonPageRank> getPersonPageRanks() {
 		return personPageRanks;
 	}
 
 	public void setPersonPageRanks(Set<PersonPageRank> personPageRanks) {
 		this.personPageRanks = personPageRanks;
+	}
+
+	public Sites getSites() {
+		return sites;
+	}
+
+	public void setSites(Sites sites) {
+		this.sites = sites;
 	}
 }

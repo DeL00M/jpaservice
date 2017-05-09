@@ -3,9 +3,10 @@ package ru.deloom.jpaservice.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
+@Embeddable
 public class PageRankId implements Serializable {
 
 	/**
@@ -13,46 +14,49 @@ public class PageRankId implements Serializable {
 	 */
 	private static final long serialVersionUID = -614211485698684185L;
 
-	private Persons persons;
+	@Column(name = "person_id")
+	private Integer personId;
 
-	private Pages pages;
+	@Column(name = "page_id")
+	private Integer pageId;
 
-	public PageRankId(Persons persons, Pages pages) {
+	public PageRankId(Integer personId, Integer pageId) {
 		super();
-		this.persons = persons;
-		this.pages = pages;
+		this.personId = personId;
+		this.pageId = pageId;
 	}
-
+	
 	public PageRankId() {
+		
 	}
 
-	public Persons getPersons() {
-		return persons;
+	public Integer getPersonId() {
+		return personId;
 	}
 
-	public void setPersons(Persons persons) {
-		this.persons = persons;
+	public void setPersonId(Integer personId) {
+		this.personId = personId;
 	}
 
-	public Pages getPages() {
-		return pages;
+	public Integer getPageId() {
+		return pageId;
 	}
 
-	public void setPages(Pages pages) {
-		this.pages = pages;
+	public void setPageId(Integer pageId) {
+		this.pageId = pageId;
 	}
-
+	
 	@Override
 	public boolean equals(Object arg0) {
 		if (this == arg0) return true;
 		if (!(arg0 instanceof PageRankId)) return false;
 		PageRankId that = (PageRankId) arg0;
-		return Objects.equals(getPersons().getId(), that.getPersons().getId()) &&
-			Objects.equals(getPages().getId(), that.getPages().getId());
+		return Objects.equals(getPersonId(), that.getPersonId()) &&
+			Objects.equals(getPageId(), that.getPageId());
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(getPersons().getId(), getPages().getId());
+		return Objects.hash(getPersonId(), getPageId());
 	}
 }

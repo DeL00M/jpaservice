@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import ru.deloom.jpaservice.entities.IEntity;
+import ru.deloom.jpaservice.entities.PersonPageRank;
 import ru.deloom.jpaservice.services.Service;
 
 public class Controller {
@@ -36,9 +37,9 @@ public class Controller {
 
 	@RequestMapping(value = "/id/{id}", method = RequestMethod.GET, produces = "application/json")
 	public HttpEntity<? extends IEntity> getById(@PathVariable("id") Integer id) {
-		IEntity sites = service.getById(id);
-		return sites != null ? new ResponseEntity<>(sites, HttpStatus.OK)
-				: new ResponseEntity<>(sites, HttpStatus.NOT_FOUND);
+		IEntity entity = service.getById(id);
+		return entity != null ? new ResponseEntity<>(entity, HttpStatus.OK)
+				: new ResponseEntity<>(entity, HttpStatus.NOT_FOUND);
 	}
 
 	@RequestMapping(value = "/add/name/{name}", method = RequestMethod.POST)
