@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "person_page_rank")
 @IdClass(PageRankId.class)
-public class PersonPageRank extends Model implements Serializable {
+public class PersonPageRank extends IEntity implements Serializable {
 
 	/**
 	 * serialVersionUID

@@ -1,5 +1,5 @@
 package ru.deloom.jpaservice.entities;
 
-public class Model {
+public class IEntity {
 
 }

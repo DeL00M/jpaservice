@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "sites")
-public class Sites extends Model implements Serializable {
+public class Sites extends IEntity implements Serializable {
 
 	/**
 	 * serialVersionUID

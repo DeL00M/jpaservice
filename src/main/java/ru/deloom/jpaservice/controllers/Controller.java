@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import ru.deloom.jpaservice.entities.Model;
+import ru.deloom.jpaservice.entities.IEntity;
 import ru.deloom.jpaservice.services.Service;
 
 public class Controller {
@@ -22,21 +22,21 @@ public class Controller {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
-	public HttpEntity<List<? extends Model>> getAll() {
-		List<? extends Model> list = service.getAll();
+	public HttpEntity<List<? extends IEntity>> getAll() {
+		List<? extends IEntity> list = service.getAll();
 		return !list.isEmpty() ? new ResponseEntity<>(list, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
 	@RequestMapping(value = "/name/{name}", method = RequestMethod.GET, produces = "application/json")
-	public HttpEntity<List<? extends Model>> getByName(@PathVariable("name") String name) {
-		List<? extends Model> list = service.getByName(name);
+	public HttpEntity<List<? extends IEntity>> getByName(@PathVariable("name") String name) {
+		List<? extends IEntity> list = service.getByName(name);
 		return !list.isEmpty() ? new ResponseEntity<>(list, HttpStatus.OK)
 				: new ResponseEntity<>(list, HttpStatus.NOT_FOUND);
 	}
 
 	@RequestMapping(value = "/id/{id}", method = RequestMethod.GET, produces = "application/json")
-	public HttpEntity<? extends Model> getById(@PathVariable("id") Integer id) {
-		Model sites = service.getById(id);
+	public HttpEntity<? extends IEntity> getById(@PathVariable("id") Integer id) {
+		IEntity sites = service.getById(id);
 		return sites != null ? new ResponseEntity<>(sites, HttpStatus.OK)
 				: new ResponseEntity<>(sites, HttpStatus.NOT_FOUND);
 	}

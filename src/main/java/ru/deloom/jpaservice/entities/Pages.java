@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "pages")
-public class Pages extends Model implements Serializable {
+public class Pages extends IEntity implements Serializable {
 
 	/**
 	 * serialVersionUID
