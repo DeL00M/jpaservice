@@ -12,4 +12,5 @@ public interface PersonPageRankService {
 	List<? extends IEntity> getAll();
 	IEntity getById(Integer personId, Integer pageId);
 	List<? extends IEntity> getByPersonId(Integer personId);
+	List<? extends IEntity> getByPageId(Integer pageId);
 }

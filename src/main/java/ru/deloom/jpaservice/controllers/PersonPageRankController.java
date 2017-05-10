@@ -43,6 +43,13 @@ public class PersonPageRankController {
 		return !list.isEmpty() ? new ResponseEntity<>(list, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
+	@RequestMapping(value = "/pageid/{pageid}", method = RequestMethod.GET, produces = "application/json")
+	public HttpEntity<List<? extends IEntity>> getByPageId(
+			@PathVariable("pageid") Integer pageId) {
+		List<? extends IEntity> list = service.getByPageId(pageId);
+		return !list.isEmpty() ? new ResponseEntity<>(list, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+	
 	@RequestMapping(value = "/add/personid/{personid}/pageid/{pageid}/rank/{rank}", method = RequestMethod.POST)
 	public HttpEntity<Boolean> add(
 			@PathVariable("personid") Integer personId, 
