@@ -10,9 +10,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "person_page_rank")
 @IdClass(PageRankId.class)
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class PersonPageRank extends IEntity implements Serializable {
 
 	/**
