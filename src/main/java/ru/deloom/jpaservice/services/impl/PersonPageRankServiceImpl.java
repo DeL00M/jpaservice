@@ -56,4 +56,10 @@ public class PersonPageRankServiceImpl implements PersonPageRankService{
 		return repository.getOne(new PageRankId(personId, pageId));
 	}
 	
+	@Override
+	@Transactional
+	public List<? extends IEntity> getByPersonId(Integer personId) {
+		return repository.findByPersonId(personId);
+	}
+	
 }

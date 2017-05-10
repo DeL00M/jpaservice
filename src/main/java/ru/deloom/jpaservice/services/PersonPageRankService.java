@@ -11,4 +11,5 @@ public interface PersonPageRankService {
 	Boolean edit(Integer personId, Integer pageId, Integer rank);
 	List<? extends IEntity> getAll();
 	IEntity getById(Integer personId, Integer pageId);
+	List<? extends IEntity> getByPersonId(Integer personId);
 }
