@@ -31,9 +31,6 @@ public class PersonPageRank extends IEntity implements Serializable {
 
 	}
 
-	@Column(name = "rank")
-	private Integer rank;
-
 	@Id
 	@Column(name = "person_id")
 	private Integer personId;
@@ -41,6 +38,9 @@ public class PersonPageRank extends IEntity implements Serializable {
 	@Id
 	@Column(name = "page_id")
 	private Integer pageId;
+
+	@Column(name = "rank")
+	private Integer rank;
 
 	@ManyToOne
 	@JoinColumn(name = "person_id", insertable = false, updatable = false)
