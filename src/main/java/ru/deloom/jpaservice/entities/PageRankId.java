@@ -3,7 +3,6 @@ package ru.deloom.jpaservice.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
@@ -14,10 +13,8 @@ public class PageRankId implements Serializable {
 	 */
 	private static final long serialVersionUID = -614211485698684185L;
 
-	@Column(name = "person_id")
 	private Integer personId;
 
-	@Column(name = "page_id")
 	private Integer pageId;
 
 	public PageRankId(Integer personId, Integer pageId) {

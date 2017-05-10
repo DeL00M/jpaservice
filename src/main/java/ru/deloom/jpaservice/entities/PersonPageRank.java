@@ -3,56 +3,51 @@ package ru.deloom.jpaservice.entities;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.Table;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import ru.deloom.jpaservice.repositories.PagesRepository;
-import ru.deloom.jpaservice.services.impl.PersonsServiceImpl;
 
 @Entity
 @Table(name = "person_page_rank")
+@IdClass(PageRankId.class)
 public class PersonPageRank extends IEntity implements Serializable {
 
 	/**
 	 * serialVersionUID
 	 */
 	private static final long serialVersionUID = -8656878207442592762L;
-	
-	@Autowired
-	private PagesRepository repository;
 
 	public PersonPageRank(Integer personId, Integer pageId, Integer rank) {
 		super();
-		pages = (Pages) repository.getOne(pageId);
-		persons = new PersonsServiceImpl().getById(personId);
+		this.personId = personId;
+		this.pageId = pageId;
 		this.rank = rank;
-		this.pageRankId = new PageRankId(personId, pageId);
 	}
-	
+
 	public PersonPageRank() {
-		
+
 	}
-	
+
 	@Column(name = "rank")
 	private Integer rank;
-	
-	@EmbeddedId
-	private PageRankId pageRankId;
+
+	@Id
+	@Column(name = "person_id")
+	private Integer personId;
+
+	@Id
+	@Column(name = "page_id")
+	private Integer pageId;
 
 	@ManyToOne
-	@MapsId("personId")
-	@JoinColumn(name = "person_id")
+	@JoinColumn(name = "person_id", insertable = false, updatable = false)
 	private Persons persons;
-	
+
 	@ManyToOne
-	@MapsId("pageId")
-	@JoinColumn(name = "page_id")
+	@JoinColumn(name = "page_id", insertable = false, updatable = false)
 	private Pages pages;
 
 	public Integer getRank() {
@@ -61,14 +56,6 @@ public class PersonPageRank extends IEntity implements Serializable {
 
 	public void setRank(Integer rank) {
 		this.rank = rank;
-	}
-
-	public PageRankId getPageRankId() {
-		return pageRankId;
-	}
-
-	public void setPageRankId(PageRankId pageRankId) {
-		this.pageRankId = pageRankId;
 	}
 
 	public Persons getPersons() {
@@ -85,5 +72,21 @@ public class PersonPageRank extends IEntity implements Serializable {
 
 	public void setPages(Pages pages) {
 		this.pages = pages;
+	}
+
+	public Integer getPersonId() {
+		return personId;
+	}
+
+	public void setPersonId(Integer personId) {
+		this.personId = personId;
+	}
+
+	public Integer getPageId() {
+		return pageId;
+	}
+
+	public void setPageId(Integer pageId) {
+		this.pageId = pageId;
 	}
 }

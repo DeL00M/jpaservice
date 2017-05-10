@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import ru.deloom.jpaservice.entities.IEntity;
-import ru.deloom.jpaservice.entities.PersonPageRank;
 import ru.deloom.jpaservice.services.Service;
 
 public class Controller {

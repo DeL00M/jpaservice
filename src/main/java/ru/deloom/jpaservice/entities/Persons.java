@@ -10,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -34,6 +33,7 @@ public class Persons extends IEntity implements Serializable {
 		this.name = name;
 		this.id = id;
 	}
+
 	public Persons(String name) {
 		super();
 		this.name = name;

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ru.deloom.jpaservice.entities.IEntity;
-import ru.deloom.jpaservice.entities.PageRankId;
 import ru.deloom.jpaservice.entities.PersonPageRank;
 import ru.deloom.jpaservice.repositories.PersonPageRankRepository;
 import ru.deloom.jpaservice.services.PersonPageRankService;
@@ -22,7 +21,9 @@ public class PersonPageRankServiceImpl implements PersonPageRankService{
 	@Override
 	public Boolean add(Integer personId, Integer pageId, Integer rank) {
 		PersonPageRank personPageRank = new PersonPageRank(personId, pageId, rank);
-		return repository.saveAndFlush(personPageRank).equals(personPageRank);
+		PersonPageRank savedEntity = repository.saveAndFlush(personPageRank);
+		return (personPageRank.getPersonId() == savedEntity.getPersonId() &&
+				personPageRank.getPageId() == savedEntity.getPageId());
 	}
 
 	@Override
@@ -46,8 +47,7 @@ public class PersonPageRankServiceImpl implements PersonPageRankService{
 	@Override
 	@Transactional
 	public List<? extends IEntity> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findAll();
 	}
 
 	@Override

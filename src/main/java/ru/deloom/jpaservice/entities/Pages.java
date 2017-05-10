@@ -5,10 +5,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,19 +23,19 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "pages")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Pages extends IEntity implements Serializable {
 
 	public Pages(String url, String text, Date modified) {
 		super();
-		//this.id = id;
+		// this.id = id;
 		this.url = url;
 		this.text = text;
 		this.modified = modified;
 	}
-	
+
 	public Pages() {
-		
+
 	}
 
 	/**
