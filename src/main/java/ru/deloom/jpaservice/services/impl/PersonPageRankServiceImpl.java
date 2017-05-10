@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ru.deloom.jpaservice.entities.IEntity;
+import ru.deloom.jpaservice.entities.PageRankId;
 import ru.deloom.jpaservice.entities.PersonPageRank;
 import ru.deloom.jpaservice.repositories.PersonPageRankRepository;
 import ru.deloom.jpaservice.services.PersonPageRankService;
@@ -29,19 +30,18 @@ public class PersonPageRankServiceImpl implements PersonPageRankService{
 	@Override
 	@Transactional
 	public Boolean exist(Integer personId, Integer pageId) {
-		return null;
+		return repository.exists(new PageRankId(personId, pageId));
 	}
 
 	@Override
 	public void delete(Integer personId, Integer pageId) {
-		// TODO Auto-generated method stub
-		
+		repository.delete(new PageRankId(personId, pageId));
 	}
 
 	@Override
 	public Boolean edit(Integer personId, Integer pageId, Integer rank) {
-		// TODO Auto-generated method stub
-		return null;
+		if (!repository.exists(new PageRankId(personId, pageId))) return false;
+		return repository.saveAndFlush(new PersonPageRank(personId, pageId, rank)).getRank() == rank;
 	}
 
 	@Override
@@ -53,8 +53,7 @@ public class PersonPageRankServiceImpl implements PersonPageRankService{
 	@Override
 	@Transactional
 	public IEntity getById(Integer personId, Integer pageId) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.getOne(new PageRankId(personId, pageId));
 	}
 	
 }

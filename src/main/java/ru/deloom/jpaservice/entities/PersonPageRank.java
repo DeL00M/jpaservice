@@ -32,11 +32,9 @@ public class PersonPageRank extends IEntity implements Serializable {
 	}
 
 	@Id
-	@Column(name = "person_id")
 	private Integer personId;
 
 	@Id
-	@Column(name = "page_id")
 	private Integer pageId;
 
 	@Column(name = "rank")
