@@ -36,6 +36,15 @@ public class PersonPageRankController {
 				: new ResponseEntity<>(entity, HttpStatus.NOT_FOUND);
 	}
 	
+	@RequestMapping(value = "/add/personid/{personid}/pageid/{pageid}/rank/{rank}", method = RequestMethod.POST)
+	public HttpEntity<Boolean> add(
+			@PathVariable("personid") Integer personId, 
+			@PathVariable("pageid") Integer pageId,
+			@PathVariable("rank") Integer rank) {
+		return service.add(personId, pageId, rank) ? new ResponseEntity<>(true, HttpStatus.CREATED)
+				: new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+	}
+	
 	@RequestMapping(value = "/edit/personid/{personid}/pageid/{pageid}/rank/{rank}", method = RequestMethod.PATCH)
 	public HttpEntity<Boolean> update(
 			@PathVariable("personid") Integer personId, 
@@ -45,12 +54,14 @@ public class PersonPageRankController {
 				: new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
 	}
 	
-	@RequestMapping(value = "/add/personid/{personid}/pageid/{pageid}/rank/{rank}", method = RequestMethod.POST)
-	public HttpEntity<Boolean> add(
+	@RequestMapping(value = "/delete/personid/{personid}/pageid/{pageid}", method = RequestMethod.DELETE)
+	public HttpEntity<Boolean> delete(
 			@PathVariable("personid") Integer personId, 
-			@PathVariable("pageid") Integer pageId,
-			@PathVariable("rank") Integer rank) {
-		return service.add(personId, pageId, rank) ? new ResponseEntity<>(true, HttpStatus.CREATED)
-				: new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+			@PathVariable("pageid") Integer pageId) {
+		if (service.exist(personId, pageId)) {
+			service.delete(personId, pageId);
+			return new ResponseEntity<>(true, HttpStatus.OK);
+			}
+		return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
 	}
 }
