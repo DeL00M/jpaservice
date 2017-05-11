@@ -13,4 +13,5 @@ public interface PagesService{
 	List<? extends IEntity> getByUrl(String url);
 	List<? extends IEntity> getAll();
 	IEntity getById(Integer id);
+	List<? extends IEntity> getBySiteId(Integer id);
 }

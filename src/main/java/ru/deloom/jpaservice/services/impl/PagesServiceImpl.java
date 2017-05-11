@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ru.deloom.jpaservice.entities.IEntity;
 import ru.deloom.jpaservice.entities.Pages;
 import ru.deloom.jpaservice.repositories.PagesRepository;
 import ru.deloom.jpaservice.services.PagesService;
@@ -16,48 +17,53 @@ import ru.deloom.jpaservice.services.PagesService;
 public class PagesServiceImpl implements PagesService{
 	
 	@Autowired
-	private PagesRepository pagesRepository;
+	private PagesRepository repository;
 
 	@Override
 	public Boolean add(String url, String text, Date modified) {
 		Pages pages = new Pages(url, text, modified);
-		return pagesRepository.saveAndFlush(pages).equals(pages);
+		return repository.saveAndFlush(pages).equals(pages);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public Boolean exist(Integer id) {
-		return pagesRepository.exists(id);
+		return repository.exists(id);
 	}
 
 	@Override
 	public void delete(Integer id) {
-		pagesRepository.delete(id);
+		repository.delete(id);
 	}
 
 	@Override
 	public Boolean edit(Integer id, String url, String text, Date modified) {
-		if (!pagesRepository.exists(id)) return false;
+		if (!repository.exists(id)) return false;
 		Pages pages = new Pages(url, text, modified);
-		return pagesRepository.saveAndFlush(pages).equals(pages);
+		return repository.saveAndFlush(pages).equals(pages);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public List<Pages> getByUrl(String url) {
-		return pagesRepository.findByUrl(url);
+		return repository.findByUrl(url);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public List<Pages> getAll() {
-		return pagesRepository.findAll();
+		return repository.findAll();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public Pages getById(Integer id) {
-		return pagesRepository.getOne(id);
+		return repository.getOne(id);
+	}
+
+	@Override
+	public List<? extends IEntity> getBySiteId(Integer id) {
+		return repository.findBySitesId(id);
 	}
 
 }
