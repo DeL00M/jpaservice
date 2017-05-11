@@ -41,4 +41,11 @@ public class PagesController {
 		return list != null ? new ResponseEntity<>(list, HttpStatus.OK)
 				: new ResponseEntity<>(list, HttpStatus.NOT_FOUND);
 	}
+	
+	@RequestMapping(value = "/url/{url}", method = RequestMethod.GET, produces = "application/json")
+	public HttpEntity<List<? extends IEntity>> getByUrl(@PathVariable("url") String url) {
+		List<? extends IEntity> list = service.getByUrl(url);
+		return list != null ? new ResponseEntity<>(list, HttpStatus.OK)
+				: new ResponseEntity<>(list, HttpStatus.NOT_FOUND);
+	}
 }
